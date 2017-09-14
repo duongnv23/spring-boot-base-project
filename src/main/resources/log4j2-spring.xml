@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+	<Properties>
+		<Property name="log-path">../logs</Property>
+	</Properties>
+	<Appenders>
+		<Console name="Console-Appender" target="SYSTEM_OUT">
+			<PatternLayout>
+				<pattern>
+					%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() @%L - %msg%n}{FATAL=Blinking bright red, ERROR=Bright red, WARN=Bright Magenta, INFO=black, DEBUG=green bold, TRACE=blue}
+				</pattern>
+				>
+			</PatternLayout>
+		</Console>
+		<RollingFile name="debug-log" fileName="${log-path}/debug.log"
+			filePattern="${log-path}/debug-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		<RollingFile name="info-log" fileName="${log-path}/info.log"
+			filePattern="${log-path}/info-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+		<RollingFile name="error-log" fileName="${log-path}/error.log"
+			filePattern="${log-path}/error-%d{yyyy-MM-dd}.log">
+			<PatternLayout>
+				<pattern>
+					[%-5level] %d{yyyy-MM-dd HH:mm:ss} [%t] %c{1} - %msg%n
+				</pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.duongnv.spring" level="debug" additivity="false">
+			<AppenderRef ref="debug-log" level="debug" />
+			<AppenderRef ref="info-log" level="info" />
+			<AppenderRef ref="error-log" level="error" />
+			<AppenderRef ref="Console-Appender" />
+		</Logger>
+		<Logger name="org.hibernate.type" level="trace" additivity="false">
+			<AppenderRef ref="Console-Appender" />
+		</Logger>
+		<Root>
+			<AppenderRef ref="Console-Appender" />
+		</Root>
+	</Loggers>
+</Configuration>
