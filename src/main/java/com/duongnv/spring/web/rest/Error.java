@@ -2,8 +2,12 @@ package com.duongnv.spring.web.rest;
 
 import org.springframework.http.HttpStatus;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 public class Error {
 
+	@JsonFormat(shape=Shape.OBJECT)
 	private HttpStatus status = HttpStatus.NOT_FOUND;
 	private String message = HttpStatus.NOT_FOUND.getReasonPhrase();
 	private int code = 0;
@@ -23,6 +27,7 @@ public class Error {
 		this.code = code;
 	}
 
+	
 	public HttpStatus getStatus() {
 		return status;
 	}

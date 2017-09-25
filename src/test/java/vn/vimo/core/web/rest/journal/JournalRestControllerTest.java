@@ -54,7 +54,7 @@ public class JournalRestControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 	}
 
-	@Test
+//	@Test
 	// @Rollback
 	public void testCreate() throws Exception {
 		JournalRestPostRequest request = new JournalRestPostRequest();
@@ -71,4 +71,5 @@ public class JournalRestControllerTest {
 		System.out.println(result.getResponse().getContentAsString());
 	}
 
+	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.duongnv.spring.dao.entity.Journal;
 import com.duongnv.spring.dao.repository.JournalRepository;
+import com.querydsl.core.types.Predicate;
 
 @Service
 public class JournalDAOServiceImpl implements JournalDAOService {
@@ -25,6 +26,11 @@ public class JournalDAOServiceImpl implements JournalDAOService {
 	@Override
 	public Page<Journal> findAll(Pageable pageable) {
 		return repository.findAll(pageable);
+	}
+
+	@Override
+	public Page<Journal> findAll(Predicate predicate, Pageable pageable) {
+		return repository.findAll(predicate, pageable);
 	}
 
 }
