@@ -21,15 +21,15 @@ public class QueryParser {
 	}
 
 	public static List<WhereCriteria> parseWhere(Class<?> clazz, PropertyEvaluater<?> evaluater, String filter) {
-		if (filter == null || filter.isEmpty()) {
-			throw new QueryException("Query is not in format: " + WHERE_FORMAT);
-		}
-
+		
 		if (!evaluater.isSupport(clazz)) {
 			throw new QueryException("evaluater does not support class " + clazz.getName());
 		}
-
+		
 		List<WhereCriteria> criterias = new ArrayList<>();
+		if(filter == null || filter.isEmpty()) {
+			return criterias;
+		}
 
 		String items[] = filter.split(ELEMENT_SEPARATOR);
 		for (String item : items) {
@@ -41,10 +41,6 @@ public class QueryParser {
 
 	private static WhereCriteria parseWhere(PropertyEvaluater<?> evaluater, String criteria) {
 		assert (criteria != null);
-
-		if (criteria == null || criteria.isEmpty()) {
-			throw new QueryException("Query criteria is not in format: " + WHERE_FORMAT);
-		}
 
 		String[] items = criteria.trim().split(PROPERTY_SEPARATOR);
 		if (items.length != 3) {
