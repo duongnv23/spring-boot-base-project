@@ -1,4 +1,4 @@
-package com.duongnv.querydsl.query.where.generator;
+package com.duongnv.spring.path.query.where.generator;
 
 import static org.junit.Assert.*;
 
@@ -7,18 +7,17 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.duongnv.path.query.QueryParser;
-import com.duongnv.path.query.filter.PropertyEvaluater;
-import com.duongnv.path.query.filter.WhereCriteria;
-import com.duongnv.path.query.filter.WherePredicateGenerator;
-import com.duongnv.path.query.filter.evaluate.JournalPropertiesEvaluate;
-import com.duongnv.path.query.filter.generator.JournalWhereExpressionGenerator;
 import com.duongnv.spring.dao.entity.QJournal;
+import com.duongnv.spring.path.query.filter.PropertyEvaluater;
+import com.duongnv.spring.path.query.filter.WhereCriteria;
+import com.duongnv.spring.path.query.filter.WherePredicateGenerator;
+import com.duongnv.spring.path.query.filter.evaluate.JournalPropertiesEvaluate;
+import com.duongnv.spring.path.query.filter.generator.JournalWhereExpressionGenerator;
 import com.querydsl.core.types.Predicate;
 
 public class JournalWhereExpressionGeneratorTest {
-	WherePredicateGenerator<QJournal> generator;
-	PropertyEvaluater<QJournal> evaluater;
+	WherePredicateGenerator generator;
+	PropertyEvaluater evaluater;
 	List<WhereCriteria> criterias;
 
 	@Before
@@ -31,7 +30,7 @@ public class JournalWhereExpressionGeneratorTest {
 	public void test() {
 		String query = "id,gt,1; id loe 4, title like %111% ";
 		try {
-			criterias = QueryParser.parseWhere(QJournal.class, evaluater, query);
+//			criterias = QueryDslUtils.parseWhere(QJournal.class, evaluater, query);
 			Predicate predicate = generator.get(criterias);
 			assertNotNull(predicate);
 		} catch (Exception e) {

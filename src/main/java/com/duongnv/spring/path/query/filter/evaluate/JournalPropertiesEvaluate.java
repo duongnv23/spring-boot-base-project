@@ -1,10 +1,10 @@
-package com.duongnv.path.query.filter.evaluate;
+package com.duongnv.spring.path.query.filter.evaluate;
 
-import com.duongnv.path.query.QueryException;
-import com.duongnv.path.query.filter.PropertyEvaluater;
 import com.duongnv.spring.dao.entity.QJournal;
+import com.duongnv.spring.path.query.QueryException;
+import com.duongnv.spring.path.query.filter.PropertyEvaluater;
 
-public class JournalPropertiesEvaluate implements PropertyEvaluater<QJournal> {
+public class JournalPropertiesEvaluate implements PropertyEvaluater {
 
 	@Override
 	public Object getValue(String property, String value) {

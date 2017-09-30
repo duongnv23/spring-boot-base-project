@@ -1,4 +1,4 @@
-package com.duongnv.path.query;
+package com.duongnv.spring.path.query;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

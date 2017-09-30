@@ -1,17 +1,17 @@
-package com.duongnv.querydsl.query.where.evaluate;
+package com.duongnv.spring.path.query.where.evaluate;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.duongnv.path.query.filter.PropertyEvaluater;
-import com.duongnv.path.query.filter.evaluate.JournalPropertiesEvaluate;
 import com.duongnv.spring.dao.entity.QCustomer;
 import com.duongnv.spring.dao.entity.QJournal;
+import com.duongnv.spring.path.query.filter.PropertyEvaluater;
+import com.duongnv.spring.path.query.filter.evaluate.JournalPropertiesEvaluate;
 
 public class JournalPropertiesEvaluateTest {
-	PropertyEvaluater<QJournal> evaluate;
+	PropertyEvaluater evaluate;
 	@Before
 	public void init() {
 		evaluate = new JournalPropertiesEvaluate();

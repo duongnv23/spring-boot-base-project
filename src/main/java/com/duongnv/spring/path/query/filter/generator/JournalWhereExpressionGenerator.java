@@ -1,15 +1,15 @@
-package com.duongnv.path.query.filter.generator;
+package com.duongnv.spring.path.query.filter.generator;
 
 import java.util.List;
 
-import com.duongnv.path.query.filter.WhereCriteria;
 import com.duongnv.spring.dao.entity.Journal;
 import com.duongnv.spring.dao.entity.QJournal;
+import com.duongnv.spring.path.query.filter.WhereCriteria;
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.PathBuilder;
 
-public class JournalWhereExpressionGenerator extends AbstractWhereExpressionGenerator<QJournal> {
+public class JournalWhereExpressionGenerator extends AbstractWhereExpressionGenerator {
 
 	@Override
 	public boolean isSupport(Class<?> clazz) {

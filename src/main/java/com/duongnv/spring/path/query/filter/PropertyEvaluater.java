@@ -1,7 +1,7 @@
-package com.duongnv.path.query.filter;
+package com.duongnv.spring.path.query.filter;
 
 
-public interface PropertyEvaluater<T> {
+public interface PropertyEvaluater {
 
 	final String valueOf = "valueOf";
 

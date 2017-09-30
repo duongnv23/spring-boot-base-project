@@ -1,6 +1,6 @@
 package com.duongnv.spring.web.rest.journal;
 
-import java.util.List;
+import java.io.IOException;
 
 import javax.validation.Valid;
 
@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.duongnv.path.query.QueryParser;
-import com.duongnv.path.query.filter.PropertyEvaluater;
-import com.duongnv.path.query.filter.WhereCriteria;
-import com.duongnv.path.query.filter.WherePredicateGenerator;
-import com.duongnv.path.query.filter.evaluate.JournalPropertiesEvaluate;
-import com.duongnv.path.query.filter.generator.JournalWhereExpressionGenerator;
 import com.duongnv.spring.dao.entity.Journal;
 import com.duongnv.spring.dao.entity.QJournal;
+import com.duongnv.spring.path.query.QueryPredicateBuilder;
+import com.duongnv.spring.path.query.filter.PropertyEvaluater;
+import com.duongnv.spring.path.query.filter.WherePredicateGenerator;
+import com.duongnv.spring.path.query.filter.evaluate.JournalPropertiesEvaluate;
+import com.duongnv.spring.path.query.filter.generator.JournalWhereExpressionGenerator;
 import com.duongnv.spring.service.journal.JournalDAOService;
+import com.duongnv.spring.support.QueryDslSupport;
+import com.duongnv.spring.web.rest.PageRequestParam;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.querydsl.core.types.Predicate;
 
 @RestController
@@ -33,25 +37,27 @@ public class JournalRestController {
 
 	@Autowired
 	private JournalDAOService service;
+	@Autowired
+	private ObjectMapper mapper;
+	@Autowired
+	private QueryPredicateBuilder builder;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public Page<Journal> get(@RequestParam(name = "page", defaultValue = "0") int page,
-			@RequestParam(name = "size", defaultValue = "20") int size,
-			@RequestParam(name = "filter", required = false) String filter,
-			@RequestParam(name = "sort", required = false) String sort) {
+	public Page<Journal> get(@RequestParam String param) throws JsonParseException, JsonMappingException, IOException {
 
-		LOGGER.info("page=%s&size=%s", page, size);
-		LOGGER.info("sort=%s", sort);
-		LOGGER.info("filter=%s", filter);
+		LOGGER.info("params=%s", param);
 
-		WherePredicateGenerator<QJournal> generator = new JournalWhereExpressionGenerator();
-		PropertyEvaluater<QJournal> evaluater = new JournalPropertiesEvaluate();
+		PageRequestParam requestParam = mapper.readValue(param, PageRequestParam.class);
 
-		List<WhereCriteria> criterias = QueryParser.parseWhere(QJournal.class, evaluater, filter);
-		Predicate predicate = generator.get(criterias);
+		LOGGER.info(requestParam);
 
-		// Long.valueOf(s)
-		return service.findAll(predicate, new QPageRequest(page, size));
+		WherePredicateGenerator generator = new JournalWhereExpressionGenerator();
+		PropertyEvaluater evaluater = new JournalPropertiesEvaluate();
+
+		Predicate predicate = builder.buildWhere(QJournal.class, generator,
+				QueryDslSupport.convert(QJournal.class, evaluater, requestParam.getFilters()));
+
+		return service.findAll(predicate, new QPageRequest(requestParam.getPage(), requestParam.getSize()));
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

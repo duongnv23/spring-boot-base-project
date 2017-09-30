@@ -1,4 +1,4 @@
-package com.duongnv.path.query.order;
+package com.duongnv.spring.path.query.order;
 
 import com.querydsl.core.types.Order;
 

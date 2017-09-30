@@ -1,10 +1,10 @@
-package com.duongnv.path.query.order;
+package com.duongnv.spring.path.query.order;
 
 import java.util.List;
 
 import com.querydsl.core.types.OrderSpecifier;
 
-public interface OrderSpecifierGenerator<T> {
+public interface OrderSpecifierGenerator {
 
 	boolean isSupport(Class<?> cls);
 

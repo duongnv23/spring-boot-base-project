@@ -1,22 +1,22 @@
-package com.duongnv.path.query.filter.generator;
+package com.duongnv.spring.path.query.filter.generator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.duongnv.path.query.QueryException;
-import com.duongnv.path.query.filter.WhereCriteria;
-import com.duongnv.path.query.filter.WherePredicateGenerator;
+import com.duongnv.spring.path.query.QueryException;
+import com.duongnv.spring.path.query.filter.WhereCriteria;
+import com.duongnv.spring.path.query.filter.WherePredicateGenerator;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathBuilder;
 import com.querydsl.core.types.dsl.StringPath;
 
-public abstract class AbstractWhereExpressionGenerator<T> implements WherePredicateGenerator<T> {
+public abstract class AbstractWhereExpressionGenerator implements WherePredicateGenerator {
 
 	protected BooleanExpression createStringPrediate(WhereCriteria criteria, PathBuilder<?> entityBuilder) {
 		StringPath path = entityBuilder.getString(criteria.getField());
-		String value = (String) criteria.getRealValue();
+		String value = (String) criteria.getValue();
 		switch (criteria.getOps()) {
 		case LIKE:
 			return path.like(value);
@@ -41,7 +41,7 @@ public abstract class AbstractWhereExpressionGenerator<T> implements WherePredic
 
 	protected BooleanExpression createLongPrediate(WhereCriteria criteria, PathBuilder<?> entityBuilder) {
 		NumberPath<Long> path = entityBuilder.getNumber(criteria.getField(), Long.class);
-		Long value = (Long) criteria.getRealValue();
+		Long value = (Long) criteria.getValue();
 		switch (criteria.getOps()) {
 		case EQ:
 			return path.eq(value);
@@ -59,22 +59,24 @@ public abstract class AbstractWhereExpressionGenerator<T> implements WherePredic
 	}
 
 	protected BooleanExpression createQuery(WhereCriteria criteria, PathBuilder<?> entityBuilder) {
-		if (criteria.getRealValue() instanceof String) {
+		if (criteria.getValue() instanceof String) {
 			return createStringPrediate(criteria, entityBuilder);
-		} else if (criteria.getRealValue() instanceof Long) {
+		} else if (criteria.getValue() instanceof Long) {
 			return createLongPrediate(criteria, entityBuilder);
 		} else {
-			throw new QueryException(
-					String.format("Can't not create expression for this criteria: % ", criteria));
+			throw new QueryException(String.format("Can't not create expression for this criteria: % ", criteria));
 		}
 	}
 
 	protected List<Predicate> createQuery(List<WhereCriteria> criterias, PathBuilder<?> entityBuilder) {
 		List<Predicate> predicates = new ArrayList<>();
-		for (WhereCriteria criteria : criterias) {
-			predicates.add(createQuery(criteria, entityBuilder));
+		try {
+			for (WhereCriteria criteria : criterias) {
+				predicates.add(createQuery(criteria, entityBuilder));
+			}
+		} catch (Exception e) {
+			throw new QueryException(String.format("Can not create predicate for filters: + %s", e.getMessage()), e);
 		}
-
 		return predicates;
 	}
 }
