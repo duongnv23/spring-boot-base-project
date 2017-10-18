@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 @Configuration
-public class DatabaseConfiguration {
+public class MyDatabaseConfiguration {
 
 	@Bean
 	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Component
-public class VimoConfigurationPropertiesReportEndpoint extends ConfigurationPropertiesReportEndpoint {
+public class BeanConfigurationPropertiesReportEndpoint extends ConfigurationPropertiesReportEndpoint {
 	@Override
 	protected void configureObjectMapper(ObjectMapper mapper) {
 		super.configureObjectMapper(mapper);
