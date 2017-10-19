@@ -12,8 +12,9 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().realmName("My Spring Application, Duong123")
 				// .and().requiresChannel().anyRequest().requiresSecure()
-				.and().authorizeRequests().antMatchers(HttpMethod.GET).permitAll().anyRequest().authenticated().and()
-				.formLogin().loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
-				.and().logout().logoutUrl("/logout").deleteCookies("JSESSIONID");
+				.and().authorizeRequests().antMatchers(HttpMethod.GET).permitAll().anyRequest().authenticated()
+				.and().formLogin().loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
+				.and().logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
+				;
 	}
 }
