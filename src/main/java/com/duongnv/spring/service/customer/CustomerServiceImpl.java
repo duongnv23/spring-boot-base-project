@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.duongnv.spring.dao.entity.Customer;
 import com.duongnv.spring.dao.repository.CustomerRepository;
 
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -37,6 +38,18 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Cust findById(Long id) {
 		return repository.findSomeThing(id);
+	}
+
+	@Override
+	public boolean isPhoneAvaliableForRegister(String phoneNumber) {
+		LOGGER.info("check phonenumber %s can be register", phoneNumber);
+		return true;
+	}
+
+	@Override
+	public int createCustomer(String customerName) {
+		LOGGER.info("create customer: %s", customerName);
+		return 0;
 	}
 
 }
