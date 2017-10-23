@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.httpBasic().realmName("My Spring Application, Duong123")
@@ -16,5 +17,9 @@ public class MySecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.and().formLogin().loginProcessingUrl("/login").usernameParameter("username").passwordParameter("password")
 				.and().logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
 				;
+		
 	}
+	
+	
+	
 }

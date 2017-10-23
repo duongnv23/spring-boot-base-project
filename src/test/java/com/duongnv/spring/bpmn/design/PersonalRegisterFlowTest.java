@@ -18,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.duongnv.spring.web.flow.register.PersonalRegisterForm;
+
 import javassist.compiler.ast.Variable;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +39,7 @@ public class PersonalRegisterFlowTest {
 	// private CustomerService customerService;
 	private ApplicationContext applicationContext;
 
-//	 @Test
+	// @Test
 	public void testDeploy() {
 		repositoryService.createDeployment().addClasspathResource("processes/PersonalRegister.bpmn").deploy();
 		System.out
@@ -45,12 +47,18 @@ public class PersonalRegisterFlowTest {
 	}
 
 //	@Test
-	public void testStartService() {
+	public void testStartProcess() {
 
 		Map<String, Object> variables = new HashMap<String, Object>();
 		variables.put("customerName", "Duong");
 		variables.put("phoneNumber", "0979586233");
 		variables.put("token", "duongnv2");
+//
+//		PersonalRegisterForm form = new PersonalRegisterForm();
+//		form.setCustomerName(variables.get("customerName").toString());
+//		form.setPhoneNumber(variables.get("phoneNumber").toString());
+
+		// variables.put("form", form);
 
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("personalRegister", "duongnv2",
 				variables);
@@ -59,34 +67,36 @@ public class PersonalRegisterFlowTest {
 		System.out.println(processInstance.getBusinessKey());
 
 		System.out.println(runtimeService.getVariableInstances(processInstance.getId()));
-		System.out.println(runtimeService.getVariableInstancesLocal(processInstance.getId()));
+//		System.out.println(runtimeService.getVariableInstancesLocal(processInstance.getId()));
 
 	}
 
-	@Test
-//	50001
-//	62501
+	 @Test
+	// 50001
+	// 62501
+	// 77501
 	public void testConfirmOtp() {
-		String processInstanceId = "62501";
+		String processInstanceId = "80005";
 		List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).taskAssignee("duongnv2")
 				.list();
 		assertNotNull(tasks);
 		System.out.println(tasks);
 		System.out.println(tasks.get(0).getAssignee());
-		
-		Map<String,Object> variables = new HashMap<>();
-		variables.put("submitOtp","123456");
-		
+
+		Map<String, Object> variables = new HashMap<>();
+		variables.put("submitOtp", "123456");
+
 		taskService.complete(tasks.get(0).getId(), variables);
 
-		List<ProcessInstance> instances = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).list();
+		List<ProcessInstance> instances = runtimeService.createProcessInstanceQuery()
+				.processInstanceId(processInstanceId).list();
 		assertNotNull(instances);
-		
+
 		System.out.println(runtimeService.getVariableInstances(instances.get(0).getId()));
-		System.out.println(runtimeService.getVariableInstancesLocal(instances.get(0).getId()));
-		
+//		System.out.println(runtimeService.getVariableInstancesLocal(instances.get(0).getId()));
+
 	}
-	
+
 	public void testCancelTask() {
 		String processInstanceId = "62501";
 		List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).taskAssignee("duongnv2")
@@ -94,8 +104,7 @@ public class PersonalRegisterFlowTest {
 		assertNotNull(tasks);
 		System.out.println(tasks);
 		System.out.println(tasks.get(0).getAssignee());
-		for(Task task : tasks) {
-			
+		for (Task task : tasks) {
 		}
 	}
 

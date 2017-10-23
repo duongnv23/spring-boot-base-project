@@ -27,11 +27,7 @@
     <sequenceFlow id="flow11" sourceRef="otpService" targetRef="sMSService"></sequenceFlow>
     <dataObject id="customerName" name="customerName" itemSubjectRef="xsd:string"></dataObject>
     <dataObject id="phoneNumber" name="phoneNumber" itemSubjectRef="xsd:string"></dataObject>
-    <dataObject id="token" name="token" itemSubjectRef="xsd:string">
-      <extensionElements>
-        <activiti:value></activiti:value>
-      </extensionElements>
-    </dataObject>
+    <dataObject id="token" name="token" itemSubjectRef="xsd:string"></dataObject>
     <dataObject id="isPhoneAvaliableForRegister" name="isPhoneAvaliableForRegister" itemSubjectRef="xsd:boolean">
       <extensionElements>
         <activiti:value>false</activiti:value>
@@ -105,14 +101,14 @@
         <omgdi:waypoint x="533.0" y="480.0"></omgdi:waypoint>
         <omgdi:waypoint x="782.0" y="405.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="100.0" x="533.0" y="480.0"></omgdc:Bounds>
+          <omgdc:Bounds height="14.0" width="53.0" x="533.0" y="480.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
         <omgdi:waypoint x="513.0" y="500.0"></omgdi:waypoint>
         <omgdi:waypoint x="319.0" y="500.0"></omgdi:waypoint>
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds height="14.0" width="100.0" x="513.0" y="500.0"></omgdc:Bounds>
+          <omgdc:Bounds height="14.0" width="40.0" x="513.0" y="500.0"></omgdc:Bounds>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">

@@ -1,6 +1,5 @@
 package com.duongnv.spring.service.system;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -12,7 +11,7 @@ public class OtpServiceImpl implements OtpService {
 
 	@Override
 	public String generateOtp() {
-		return RandomStringUtils.random(6);
+		return "" + RandomUtils.nextInt(100000, 1000000);
 	}
 
 	@Override
