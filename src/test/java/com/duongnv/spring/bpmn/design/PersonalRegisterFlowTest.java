@@ -46,7 +46,7 @@ public class PersonalRegisterFlowTest {
 				.println("Number of process definitions: " + repositoryService.createProcessDefinitionQuery().count());
 	}
 
-//	@Test
+	@Test
 	public void testStartProcess() {
 
 		Map<String, Object> variables = new HashMap<String, Object>();
@@ -54,11 +54,11 @@ public class PersonalRegisterFlowTest {
 		variables.put("phoneNumber", "0979586233");
 		variables.put("token", "duongnv2");
 //
-//		PersonalRegisterForm form = new PersonalRegisterForm();
-//		form.setCustomerName(variables.get("customerName").toString());
-//		form.setPhoneNumber(variables.get("phoneNumber").toString());
+		PersonalRegisterForm form = new PersonalRegisterForm();
+		form.setCustomerName(variables.get("customerName").toString());
+		form.setPhoneNumber(variables.get("phoneNumber").toString());
 
-		// variables.put("form", form);
+		 variables.put("form", form);
 
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("personalRegister", "duongnv2",
 				variables);
@@ -67,16 +67,17 @@ public class PersonalRegisterFlowTest {
 		System.out.println(processInstance.getBusinessKey());
 
 		System.out.println(runtimeService.getVariableInstances(processInstance.getId()));
-//		System.out.println(runtimeService.getVariableInstancesLocal(processInstance.getId()));
+		System.out.println(runtimeService.getVariable(processInstance.getId(), "form"));
 
 	}
 
-	 @Test
+//	 @Test
 	// 50001
 	// 62501
 	// 77501
+//	 92501
 	public void testConfirmOtp() {
-		String processInstanceId = "80005";
+		String processInstanceId = "92501";
 		List<Task> tasks = taskService.createTaskQuery().processInstanceId(processInstanceId).taskAssignee("duongnv2")
 				.list();
 		assertNotNull(tasks);

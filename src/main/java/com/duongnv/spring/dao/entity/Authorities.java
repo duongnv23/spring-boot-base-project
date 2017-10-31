@@ -94,4 +94,10 @@ public class Authorities implements java.io.Serializable {
 		this.groupses = groupses;
 	}
 
+	@Override
+	public String toString() {
+		return "Authorities [id=" + id + ", authority=" + authority + ", description=" + description + ", userses="
+				+ userses + ", groupses=" + groupses + "]";
+	}
+
 }

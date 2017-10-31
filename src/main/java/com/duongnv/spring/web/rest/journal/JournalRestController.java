@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,6 +44,7 @@ public class JournalRestController {
 	private QueryPredicateBuilder builder;
 
 	@RequestMapping(method = RequestMethod.GET)
+	
 	public Page<Journal> get(@RequestParam String param) throws JsonParseException, JsonMappingException, IOException {
 
 		LOGGER.info("params=%s", param);
@@ -61,11 +63,10 @@ public class JournalRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@Secured(value= {"ROLE_ADMIN"})
 	public Journal create(@Valid @RequestBody JournalRestPostRequest journalRestPostRequest) throws Exception {
 		LOGGER.info(journalRestPostRequest);
-		// LOGGER.info(bindingResult);
-		// if (bindingResult.hasErrors()) {
-		// }
+		
 		Journal journal = journalRestPostRequest.toJournal();
 		service.save(journal);
 		return journal;

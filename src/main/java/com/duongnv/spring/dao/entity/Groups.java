@@ -1,5 +1,6 @@
 package com.duongnv.spring.dao.entity;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -78,6 +79,12 @@ public class Groups implements java.io.Serializable {
 
 	public void setUserses(Set<Users> userses) {
 		this.userses = userses;
+	}
+
+	@Override
+	public String toString() {
+		return "Groups [id=" + id + ", name=" + name + ", authoritieses=" + authoritieses + ", userses=" + userses
+				+ "]";
 	}
 
 }

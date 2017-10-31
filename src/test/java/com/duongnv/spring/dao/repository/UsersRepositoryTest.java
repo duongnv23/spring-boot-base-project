@@ -20,7 +20,7 @@ public class UsersRepositoryTest {
 
 	@Test
 	public void test() {
-		Users user = repository.findActiveUser("user");
+		Users user = repository.findActiveUser("operator_admin");
 		System.out.println(user);
 	}
 

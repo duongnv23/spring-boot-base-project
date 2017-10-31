@@ -1,6 +1,13 @@
 package com.duongnv.spring.web.flow.register;
 
-public class PersonalRegisterForm {
+import java.io.Serializable;
+
+public class PersonalRegisterForm implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -219347059053368161L;
 
 	private String customerName;
 	private String phoneNumber;
@@ -19,6 +26,11 @@ public class PersonalRegisterForm {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
+	}
+
+	@Override
+	public String toString() {
+		return "PersonalRegisterForm [customerName=" + customerName + ", phoneNumber=" + phoneNumber + "]";
 	}
 
 }
