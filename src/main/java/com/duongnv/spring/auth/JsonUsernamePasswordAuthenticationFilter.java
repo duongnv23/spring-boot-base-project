@@ -10,7 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.duongnv.spring.config.MySecurityConfiguration;
+import com.duongnv.spring.config.WebSecurityConfiguration;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -26,7 +26,7 @@ public class JsonUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
 	private ObjectMapper mapper;
 	
 	@Autowired
-	private MySecurityConfiguration configuration;
+	private WebSecurityConfiguration configuration;
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {

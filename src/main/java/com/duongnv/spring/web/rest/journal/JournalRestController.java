@@ -44,7 +44,7 @@ public class JournalRestController {
 	private QueryPredicateBuilder builder;
 
 	@RequestMapping(method = RequestMethod.GET)
-	
+	@Secured(value = { "ROLE_USER" })
 	public Page<Journal> get(@RequestParam String param) throws JsonParseException, JsonMappingException, IOException {
 
 		LOGGER.info("params=%s", param);
@@ -63,10 +63,10 @@ public class JournalRestController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	@Secured(value= {"ROLE_ADMIN"})
+	@Secured(value = { "ROLE_ADMIN" })
 	public Journal create(@Valid @RequestBody JournalRestPostRequest journalRestPostRequest) throws Exception {
 		LOGGER.info(journalRestPostRequest);
-		
+
 		Journal journal = journalRestPostRequest.toJournal();
 		service.save(journal);
 		return journal;

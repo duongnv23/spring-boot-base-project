@@ -6,11 +6,11 @@ import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHtt
 import org.springframework.session.web.http.HeaderHttpSessionStrategy;
 import org.springframework.session.web.http.HttpSessionStrategy;
 
-@Configuration
-@EnableJdbcHttpSession
-public class HttpSessionConfig {
+//@Configuration
+//@EnableJdbcHttpSession
+public class HttpSessionJdbcConfig {
 
-	@Bean
+//	@Bean
 	public HttpSessionStrategy httpSessionStrategy() {
 		return new HeaderHttpSessionStrategy();
 	}
