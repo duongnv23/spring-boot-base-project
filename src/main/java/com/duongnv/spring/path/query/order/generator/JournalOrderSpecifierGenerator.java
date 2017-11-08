@@ -8,7 +8,7 @@ import com.duongnv.spring.path.query.order.OrderCriteria;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
 
-public class JournalOderSpecifierGenerator extends AbstractOderSpecifierGenerator<QJournal> {
+public class JournalOrderSpecifierGenerator extends AbstractOrderSpecifierGenerator<QJournal> {
 
 	@Override
 	public boolean isSupport(Class<?> cls) {

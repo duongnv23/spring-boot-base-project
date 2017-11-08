@@ -20,7 +20,7 @@ import com.duongnv.spring.path.query.filter.evaluate.JournalPropertiesEvaluate;
 import com.duongnv.spring.path.query.filter.generator.JournalWhereExpressionGenerator;
 import com.duongnv.spring.path.query.order.OrderCriteria;
 import com.duongnv.spring.path.query.order.OrderSpecifierGenerator;
-import com.duongnv.spring.path.query.order.generator.JournalOderSpecifierGenerator;
+import com.duongnv.spring.path.query.order.generator.JournalOrderSpecifierGenerator;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Predicate;
 
@@ -42,7 +42,7 @@ public class JournalRepositoryTest {
 	public void init() throws Exception {
 		generator = new JournalWhereExpressionGenerator();
 		evaluater = new JournalPropertiesEvaluate();
-		orderSpecifierGenerator = new JournalOderSpecifierGenerator();
+		orderSpecifierGenerator = new JournalOrderSpecifierGenerator();
 	}
 
 	// @Test

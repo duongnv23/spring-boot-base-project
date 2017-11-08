@@ -10,7 +10,7 @@ import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.dsl.PathBuilder;
 
-public abstract class AbstractOderSpecifierGenerator<T> implements OrderSpecifierGenerator {
+public abstract class AbstractOrderSpecifierGenerator<T> implements OrderSpecifierGenerator {
 
 	protected List<OrderSpecifier<?>> createOrder(List<OrderCriteria> criterias, PathBuilder<Journal> entityBuilder) {
 		List<OrderSpecifier<?>> specifiers = new ArrayList<>();

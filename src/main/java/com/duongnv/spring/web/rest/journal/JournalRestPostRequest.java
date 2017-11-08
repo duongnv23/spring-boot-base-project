@@ -14,7 +14,7 @@ public class JournalRestPostRequest {
 	@Min(1)
 	private Long id;
 	@NotNull
-	@Size(min = 16, max = 255)
+	@Size(min = 16, max = 255,message="{journalRestPostRequest.title}")
 	private String title;
 	@Size(max = 511)
 	private String summary;

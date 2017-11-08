@@ -7,6 +7,8 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.security.access.annotation.Secured;
@@ -23,6 +25,8 @@ import com.duongnv.spring.path.query.filter.PropertyEvaluater;
 import com.duongnv.spring.path.query.filter.WherePredicateGenerator;
 import com.duongnv.spring.path.query.filter.evaluate.JournalPropertiesEvaluate;
 import com.duongnv.spring.path.query.filter.generator.JournalWhereExpressionGenerator;
+import com.duongnv.spring.path.query.order.OrderSpecifierGenerator;
+import com.duongnv.spring.path.query.order.generator.JournalOrderSpecifierGenerator;
 import com.duongnv.spring.service.journal.JournalDAOService;
 import com.duongnv.spring.support.QueryDslSupport;
 import com.duongnv.spring.web.rest.PageRequestParam;
@@ -43,8 +47,10 @@ public class JournalRestController {
 	@Autowired
 	private QueryPredicateBuilder builder;
 
+	@Autowired
+	private MessageSource messageSource;
+
 	@RequestMapping(method = RequestMethod.GET)
-	@Secured(value = { "ROLE_USER" })
 	public Page<Journal> get(@RequestParam String param) throws JsonParseException, JsonMappingException, IOException {
 
 		LOGGER.info("params=%s", param);
@@ -52,6 +58,10 @@ public class JournalRestController {
 		PageRequestParam requestParam = mapper.readValue(param, PageRequestParam.class);
 
 		LOGGER.info(requestParam);
+
+		LOGGER.info(LocaleContextHolder.getLocale());
+		;
+		LOGGER.info(messageSource.getMessage("journalRestPostRequest.title", null, LocaleContextHolder.getLocale()));
 
 		WherePredicateGenerator generator = new JournalWhereExpressionGenerator();
 		PropertyEvaluater evaluater = new JournalPropertiesEvaluate();
